@@ -84,18 +84,11 @@ function callWatsonForAnalysis (text) {
         }
       },
       function (err, tone) {
-        if (err) {
-          resolve({
-            score: 50,
-            category: 'likely positive'
-          })
-        } else {
-          resolve({
-            score: (tone.sentiment.document.score * 100 + 100) / 2,
-            category: tone.sentiment.document.score > 0 ? 'likely positive' : 'maybe negative'
-          })
-        }
-
+        const score = err ? 50 : (tone.sentiment.document.score * 100 + 100) / 2
+        resolve({
+          score: score,
+          category: score > 50 ? 'likely positive' : 'maybe negative'
+        })
       }
     )
   })

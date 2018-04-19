@@ -46,7 +46,9 @@ app.use(function (err, req, res, next) {
 	res.locals.message = err.message
 	res.locals.error = req.app.get('env') === 'development' ? err : {}
 
-	logger.error(err)
+	if(process.env.NODE_ENV !== 'test') {
+    logger.error(err)
+  }
 	res.sendStatus(err.status || HttpStatus.INTERNAL_SERVER_ERROR)
 })
 

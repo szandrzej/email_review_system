@@ -16,16 +16,26 @@ async function pushNewReview (req, res) {
   }
 }
 
-function updateReview (req, res) {
-  res.status(HttpStatus.OK).send({
-    id: req.params.reviewId,
-    email: 'email@test.com',
-    text: req.body.text,
-    created_at: new Date(),
-    score: 20,
-    category: 'likely positive',
-    published: false
-  })
+async function updateReview (req, res) {
+  try {
+    const result = await callWatsonForAnalysis(req.body.text)
+    const review = await Review.findOneAndUpdate(
+      { _id: ObjectId(req.params.reviewId) },
+      {
+        ...result,
+        text: req.body.text
+      },
+      { new: true })
+    if(review) {
+      res.status(HttpStatus.OK).send(review)
+    } else {
+      res.sendStatus(HttpStatus.NOT_FOUND)
+    }
+  } catch (err) {
+    console.log(err)
+    logger.error(err)
+    res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  }
 }
 
 async function publishReview (req, res) {

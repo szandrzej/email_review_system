@@ -11,12 +11,13 @@ mongoose.connect(mongo.connectionUrl, {})
 const { ObjectId } = mongoose.Types
 const { Review } = require('../commons/schema')(mongoose)
 const should = chai.should()
+const expect = chai.expect
 
 chai.use(chaiHttp)
 
 const reviewId = ObjectId()
 
-describe('Endpoints', () => {
+describe('POST /reviews', () => {
 
   before( async () => {
     await Review.remove({})
@@ -44,7 +45,46 @@ describe('Endpoints', () => {
       })
   })
 
-  it('POST /reviews returns 201', (done) => {
+  it('POST /reviews without text in body returns 400', (done) => {
+    chai.request(server)
+      .post('/api/reviews')
+      .send({
+        text2: 'Lorem ipsum',
+        email: 'test@test.com'
+      })
+      .end((err, res) => {
+        res.should.have.status(400)
+        done()
+      })
+  })
+
+  it('POST /reviews without email in body returns 400', (done) => {
+    chai.request(server)
+      .post('/api/reviews')
+      .send({
+        text: 'Lorem ipsum',
+        email1: 'test@test.com'
+      })
+      .end((err, res) => {
+        res.should.have.status(400)
+        done()
+      })
+  })
+
+  it('POST /reviews with incorrect email in body returns 400', (done) => {
+    chai.request(server)
+      .post('/api/reviews')
+      .send({
+        text: 'Lorem ipsum',
+        email1: 'testtest.com'
+      })
+      .end((err, res) => {
+        res.should.have.status(400)
+        done()
+      })
+  })
+
+  it('POST /reviews returns created object', (done) => {
     chai.request(server)
       .post('/api/reviews')
       .send({
@@ -52,7 +92,7 @@ describe('Endpoints', () => {
         email: 'test@test.com'
       })
       .end((err, res) => {
-        res.should.have.status(201)
+        expect(res.body).to.have.all.keys('_id', 'score', 'text','created_at', 'category','email', 'published', '__v')
         done()
       })
   })

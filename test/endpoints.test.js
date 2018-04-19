@@ -31,8 +31,6 @@ describe('Endpoints', () => {
     })
   })
 
-
-
   it('POST /reviews returns 201', (done) => {
     chai.request(server)
       .post('/api/reviews')

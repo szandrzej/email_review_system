@@ -8,14 +8,14 @@ const app = require('../app')
 const http = require('http')
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird');
-const { backend, mongo } = require('../config')
+const { mongo } = require('../config')
 
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || backend.port)
+const port = normalizePort(process.env.PORT || 3000)
 app.set('port', port)
 
 /**

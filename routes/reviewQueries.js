@@ -1,4 +1,5 @@
 const HttpStatus = require('http-status-codes')
+
 const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Types
 const { Review } = require('../commons/schema')(mongoose)
@@ -20,7 +21,6 @@ async function retrieveReviews (req, res) {
     logger.error(err)
     res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   }
-}
 
 module.exports = {
   retrieveReviews

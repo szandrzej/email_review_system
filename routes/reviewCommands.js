@@ -28,16 +28,17 @@ function updateReview (req, res) {
   })
 }
 
-function callWatsonForAnalysis (text) {
-  return new Promise(resolve => {
-    resolve({
-      score: 77,
-      category: 'likely positive'
-    })
-  })
-}
-
-function publishReview (req, res) {
+async function publishReview (req, res) {
+  try {
+    const review = await Review.findOneAndUpdate(
+      { _id: ObjectId(req.params.reviewId) },
+      { published: req.body.publish },
+      { new: true })
+  } catch (err) {
+    console.log(err)
+    logger.error(err)
+    res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  }
   res.status(HttpStatus.OK).send({
     id: req.params.reviewId,
     email: 'email@test.com',
@@ -46,6 +47,15 @@ function publishReview (req, res) {
     score: 20,
     category: 'likely positive',
     published: req.body.publish
+  })
+}
+
+function callWatsonForAnalysis (text) {
+  return new Promise(resolve => {
+    resolve({
+      score: 77,
+      category: 'likely positive'
+    })
   })
 }
 

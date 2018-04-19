@@ -6,7 +6,7 @@ const should = chai.should()
 chai.use(chaiHttp)
 
 describe('Web server', () => {
-  it('GET /api returns 404', (done) => {
+  it('GET call /api returns 404', (done) => {
     chai.request(server)
       .get('/api')
       .end((err, res) => {

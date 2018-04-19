@@ -23,8 +23,10 @@ const accessLogStream = rfs('access.log', {
 const swStats = require('swagger-stats')
 app.use(swStats.getMiddleware({}))
 
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" - :response-time ms', { stream: accessLogStream }))
-app.use(morgan('dev'))
+if(process.env.NODE_ENV !== 'test') {
+  app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" - :response-time ms', { stream: accessLogStream }))
+  app.use(morgan('dev'))
+}
 
 app.use(cors())
 app.use(bodyParser.json())

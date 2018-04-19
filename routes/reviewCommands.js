@@ -34,6 +34,7 @@ async function publishReview (req, res) {
       { _id: ObjectId(req.params.reviewId) },
       { published: req.body.publish },
       { new: true })
+    res.status(HttpStatus.OK).send(review)
   } catch (err) {
     console.log(err)
     logger.error(err)

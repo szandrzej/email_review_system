@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
     "dev-back": "nodemon bin/www -L",
-    "test": "mocha --reporter spec",
+    "test": "mocha --reporter spec  --exit",
     "docker": "NODE_ENV=docker nodemon bin/www -L",
     "local": "NODE_ENV=local nodemon bin/www -L"
   },
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "eslint": "^4.13.1",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-import": "^2.8.0",

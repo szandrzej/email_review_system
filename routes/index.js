@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { body, validationResult } = require('express-validator/check')
+const { query, body, validationResult } = require('express-validator/check')
 const { retrieveReviews } = require('./reviewQueries')
 const { publishReview, pushNewReview, updateReview } = require('./reviewCommands')
 const HttpStatus = require('http-status-codes')
@@ -18,7 +18,11 @@ const rulesForPublishReview = [
   body('publish').exists().isBoolean()
 ]
 
-router.get('/reviews', retrieveReviews)
+const rulesForRetrieveReviews = [
+  query('published').optional().isBoolean()
+]
+
+router.get('/reviews', [rulesForRetrieveReviews, checkErrors ], retrieveReviews)
 
 router.post('/reviews', [ rulesForCreateReview, checkErrors ], pushNewReview)
 router.put('/reviews/:reviewId', [ rulesForUpdateReview, checkErrors ], updateReview)

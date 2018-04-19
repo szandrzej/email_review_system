@@ -28,24 +28,30 @@ function updateReview (req, res) {
   })
 }
 
+async function publishReview (req, res) {
+  try {
+    const review = await Review.findOneAndUpdate(
+      { _id: ObjectId(req.params.reviewId) },
+      { published: req.body.publish },
+      { new: true })
+    if(review) {
+      res.status(HttpStatus.OK).send(review)
+    } else {
+      res.sendStatus(HttpStatus.NOT_FOUND)
+    }
+  } catch (err) {
+    console.log(err)
+    logger.error(err)
+    res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  }
+}
+
 function callWatsonForAnalysis (text) {
   return new Promise(resolve => {
     resolve({
       score: 77,
       category: 'likely positive'
     })
-  })
-}
-
-function publishReview (req, res) {
-  res.status(HttpStatus.OK).send({
-    id: req.params.reviewId,
-    email: 'email@test.com',
-    text: 'lorem ipsum lorem ipsum',
-    created_at: new Date(),
-    score: 20,
-    category: 'likely positive',
-    published: req.body.publish
   })
 }
 

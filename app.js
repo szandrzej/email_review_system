@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const api = require('./routes')
 const cors = require('cors')
 const logger = require('./commons/utils/logger')
+const HttpStatus = require('http-status-codes')
 
 const rfs = require('rotating-file-stream')
 
@@ -29,12 +30,13 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use('/api', api)
 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
 	const err = new Error('Not Found')
-	err.status = 404
+	err.status = HttpStatus.NOT_FOUND
 	next(err)
 })
 
@@ -45,7 +47,7 @@ app.use(function (err, req, res, next) {
 	res.locals.error = req.app.get('env') === 'development' ? err : {}
 
 	logger.error(err)
-	res.sendStatus(err.status || 500)
+	res.sendStatus(err.status || HttpStatus.INTERNAL_SERVER_ERROR)
 })
 
 module.exports = app

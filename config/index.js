@@ -13,4 +13,4 @@ const enviroments = {
   local
 }
 
-module.exports = enviroments[process.env.NODE_ENV || 'production']
+module.exports = local //enviroments[process.env.NODE_ENV || 'production']

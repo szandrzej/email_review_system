@@ -1447,7 +1447,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.3, classnames@^2.2.5:
+classnames@^2.2.3:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -1587,10 +1587,6 @@ compression@^1.5.2:
     on-headers "~1.0.1"
     safe-buffer "5.1.1"
     vary "~1.1.2"
-
-computed-style@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/computed-style/-/computed-style-0.3.0.tgz#399bf456b89b94aae028e14772878a9b54632338"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -4575,6 +4571,10 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.1, mkdirp@~0.5.0, mkdi
   dependencies:
     minimist "0.0.8"
 
+momentjs@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/momentjs/-/momentjs-2.0.0.tgz#73df904b4fa418f6e3c605e831cef6ed5518ebd4"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -5633,12 +5633,6 @@ react-popper@^0.8.3:
   dependencies:
     popper.js "^1.12.9"
     prop-types "^15.6.0"
-
-react-portal@^3.1.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/react-portal/-/react-portal-3.2.0.tgz#4224e19b2b05d5cbe730a7ba0e34ec7585de0043"
-  dependencies:
-    prop-types "^15.5.8"
 
 react-scripts@1.1.4:
   version "1.1.4"
@@ -6808,15 +6802,6 @@ uglifyjs-webpack-plugin@^0.4.6:
 uid-number@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
-
-uikit-react@^2.3.10:
-  version "2.3.10"
-  resolved "https://registry.yarnpkg.com/uikit-react/-/uikit-react-2.3.10.tgz#48f814d5c755afd2785ec55c2d79671ab243c398"
-  dependencies:
-    classnames "^2.2.5"
-    computed-style "^0.3.0"
-    object-assign "^4.1.1"
-    react-portal "^3.1.0"
 
 union-value@^1.0.0:
   version "1.0.0"

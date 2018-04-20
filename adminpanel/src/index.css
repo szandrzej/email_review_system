@@ -3,3 +3,44 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.review {
+  margin: 8px auto;
+  border: 1px #C8E6C9 solid;
+}
+
+.review .review-header {
+  background-color: #C8E6C9;
+  padding: 4px 8px;
+}
+
+.review .review-content {
+  background-color: #E8F5E9;
+  padding: 8px;
+  min-height: 100px;
+}
+
+.review .review-content p{
+  color: #222222;
+  text-align: left;
+  margin: 0;
+}
+
+.review-header .header-email {
+  color: #222;
+  font-size: 16px;
+  text-align: left;
+  margin: 0;
+}
+
+.review-header .header-date {
+  color: #444;
+  font-size: 12px;
+  text-align: left;
+  margin: 0;
+}
+
+.block {
+  display: block !important;
+}
+

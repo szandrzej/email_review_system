@@ -27,7 +27,7 @@ describe('GET /reviews', () => {
       email: 'test@test.com',
       created_at: Date.now(),
       score: 12,
-      category: 'maybe negative',
+      category: 'maybe.negative',
       published: false
     })
     await Review.create({
@@ -36,7 +36,7 @@ describe('GET /reviews', () => {
       email: 'test2@test.com',
       created_at: Date.now(),
       score: 89,
-      category: 'likely positive',
+      category: 'likely.positive',
       published: true
     })
   })

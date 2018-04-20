@@ -87,7 +87,7 @@ function callWatsonForAnalysis (text) {
         const score = err ? 50 : (tone.sentiment.document.score * 100 + 100) / 2
         resolve({
           score: score,
-          category: score > 50 ? 'likely positive' : 'maybe negative'
+          category: score > 50 ? 'likely_positive' : 'maybe_negative'
         })
       }
     )

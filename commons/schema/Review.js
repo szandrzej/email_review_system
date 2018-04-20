@@ -19,7 +19,7 @@ const ReviewSchema = new Schema({
   },
   category: {
     type: String,
-    enum: [ 'likely positive', 'maybe negative' ],
+    enum: [ 'likely_positive', 'maybe_negative' ],
     required: true
   },
   published: {

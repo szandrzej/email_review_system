@@ -1,10 +1,11 @@
 {
-  "name": "reviewer",
+  "name": "adminpanel",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.0",
+    "moment": "^2.22.1",
     "momentjs": "^2.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

@@ -4,6 +4,10 @@ import './App.css'
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap'
 import axios from 'axios'
 
+const API = axios.create({
+  baseURL: 'http://localhost:3000/api/reviews',
+})
+
 class App extends Component {
 
   constructor (props) {
@@ -11,7 +15,7 @@ class App extends Component {
     this.state = {
       email: '',
       text: '',
-      currentReview: {}
+      currentId: null
     }
   }
 
@@ -27,21 +31,31 @@ class App extends Component {
     })
   }
 
-  handleClick = async (event) => {
-    const {email, text} = this.state
+  handleClear = () => {
+    this.setState({
+      email: '',
+      text: '',
+      currentId: null
+    })
+  }
+
+  handleClick = async () => {
+    const { email, text, currentId } = this.state
     try {
-      const response = await axios.post('http://localhost:3000/api/reviews', { email, text })
-      console.log(response)
+      let response
+      response = currentId
+        ? await API.put(`/${currentId}`, { text })
+        : await API.post('/', { email, text })
       this.setState({
-        currentReview: response.data
+        currentId: response.data._id
       })
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
-
   }
 
   render () {
+    const { email, text, currentId } = this.state
     return (
       <div className="App">
         <header className="App-header">
@@ -50,21 +64,19 @@ class App extends Component {
         </header>
         <Container>
           <Row>
-            <Form className="full-width">
-              <Col md={ 6 }>
+            <Form className="full-width space-above">
+              <Col md={ { size: 6, offset: 3 } }>
+                <h1>Put your review!</h1>
                 <FormGroup>
-                  <Label className="text-left" for="exampleEmail">Email</Label>
                   <Input type="email" name="email" id="email" onChange={ this.changeEmail } value={ this.state.email }
-                         placeholder="with a placeholder"/>
+                         placeholder="Sender email"/>
                 </FormGroup>
                 <FormGroup>
-                  <Label className="text-left" for="exampleText">Review content</Label>
-                  <Input type="textarea" name="text" id="text" onChange={ this.changeText } value={ this.state.text }/>
+                  <Input type="textarea" name="text" id="text" placeholder="Review content" onChange={ this.changeText } value={ this.state.text }/>
                 </FormGroup>
-                <Button color="primary" size="lg" block onClick={this.handleClick}>Submit</Button>
-              </Col>
-              <Col md={6}>
-                <p>{ JSON.stringify(this.state) }</p>
+                <Button color="primary" block disabled={ !(email && text) }
+                        onClick={ this.handleClick }>{ currentId ? 'Update' : 'Submit' }</Button>
+                <Button color="link" block onClick={this.handleClear}>Clear</Button>
               </Col>
             </Form>
           </Row>

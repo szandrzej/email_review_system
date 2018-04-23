@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
-    "dev-back": "nodemon bin/www -L",
+    "dev-back": "nodemon bin/www -L --ignore reviewer/",
     "test": "NODE_ENV=test mocha --reporter spec  --exit -t 5000",
     "docker": "NODE_ENV=docker nodemon bin/www -L",
     "local": "NODE_ENV=local nodemon bin/www -L"
@@ -16,6 +16,7 @@
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "~2.6.9",
+    "dotenv": "^5.0.1",
     "express": "~4.15.5",
     "express-validator": "^4.3.0",
     "http-status-codes": "^1.3.0",
@@ -24,6 +25,7 @@
     "rotating-file-stream": "^1.3.4",
     "serve-favicon": "~2.4.5",
     "swagger-stats": "^0.94.0",
+    "watson-developer-cloud": "^3.3.0",
     "winston": "^2.4.0",
     "winston-daily-rotate-file": "^1.7.2",
     "ws": "^3.2.0"

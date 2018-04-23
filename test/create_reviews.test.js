@@ -27,7 +27,7 @@ describe('POST /reviews', () => {
       email: 'test@test.com',
       created_at: Date.now(),
       score: 12,
-      category: 'maybe negative',
+      category: 'maybe.negative',
       published: false
     })
   })

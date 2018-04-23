@@ -3,6 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap'
 import axios from 'axios'
+import Review from './Review'
 
 const API = axios.create({
   baseURL: 'http://localhost:3000/api/reviews',
@@ -15,7 +16,19 @@ class App extends Component {
     this.state = {
       email: '',
       text: '',
-      currentId: null
+      currentId: null,
+      reviews: []
+    }
+  }
+
+  async componentDidMount  () {
+    try {
+      const reviews = await API.get('?published=true')
+      this.setState({
+        reviews: reviews.data
+      })
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -55,7 +68,7 @@ class App extends Component {
   }
 
   render () {
-    const { email, text, currentId } = this.state
+    const { email, text, currentId, reviews } = this.state
     return (
       <div className="App">
         <header className="App-header">
@@ -64,8 +77,8 @@ class App extends Component {
         </header>
         <Container>
           <Row>
-            <Form className="full-width space-above">
-              <Col md={ { size: 6, offset: 3 } }>
+              <Col md={6} >
+                <Form className="full-width space-above">
                 <h1>Put your review!</h1>
                 <FormGroup>
                   <Input type="email" name="email" id="email" onChange={ this.changeEmail } value={ this.state.email }
@@ -77,8 +90,16 @@ class App extends Component {
                 <Button color="primary" block disabled={ !(email && text) }
                         onClick={ this.handleClick }>{ currentId ? 'Update' : 'Submit' }</Button>
                 <Button color="link" block onClick={this.handleClear}>Clear</Button>
+                </Form>
               </Col>
-            </Form>
+            <Col md={6} className="space-above">
+              <h1>Published reviews</h1>
+              {
+                reviews.map(r =>
+                  <Review review={r} key={r._id}/>
+                )
+              }
+            </Col>
           </Row>
         </Container>
       </div>

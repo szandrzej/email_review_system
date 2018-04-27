@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
 }
-
+require('express-async-errors')
 const express = require('express')
 const path = require('path')
 const fs = require('fs')

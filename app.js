@@ -5,6 +5,7 @@ require('express-async-errors')
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
+const helmet = require('helmet')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -32,6 +33,7 @@ if(process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'))
 }
 
+app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))

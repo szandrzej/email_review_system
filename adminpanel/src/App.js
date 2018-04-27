@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import { Container, Button } from 'reactstrap'
 import axios from 'axios'
@@ -52,10 +51,6 @@ class App extends Component {
     const { reviews } = this.state
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={ logo } className="App-logo" alt="logo"/>
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
         <Container>
           <h1>Admin panel</h1>
           <Button color='secondary' className='block' onClick={this.handleUpdate}>Update</Button>

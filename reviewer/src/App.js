@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
-import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap'
+import { Container, Row, Col, Form, FormGroup, Input, Button } from 'reactstrap'
 import axios from 'axios'
 import Review from './Review'
 
@@ -55,26 +54,25 @@ class App extends Component {
   handleClick = async () => {
     const { email, text, currentId } = this.state
     try {
-      let response
-      response = currentId
+      const response = currentId
         ? await API.put(`/${currentId}`, { text })
         : await API.post('/', { email, text })
       this.setState({
-        currentId: response.data._id
+        currentId: response.data._id,
+        error: null
       })
     } catch (err) {
+      this.setState({
+        error: 'Sending review failed'
+      })
       console.log(err)
     }
   }
 
   render () {
-    const { email, text, currentId, reviews } = this.state
+    const { email, text, currentId, reviews, error } = this.state
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={ logo } className="App-logo" alt="logo"/>
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
         <Container>
           <Row>
               <Col md={6} >
@@ -87,6 +85,9 @@ class App extends Component {
                 <FormGroup>
                   <Input type="textarea" name="text" id="text" placeholder="Review content" onChange={ this.changeText } value={ this.state.text }/>
                 </FormGroup>
+                  { error &&
+                    <p className="error-text">{ error }</p>
+                  }
                 <Button color="primary" block disabled={ !(email && text) }
                         onClick={ this.handleClick }>{ currentId ? 'Update' : 'Submit' }</Button>
                 <Button color="link" block onClick={this.handleClear}>Clear</Button>

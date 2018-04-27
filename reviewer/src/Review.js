@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Progress, Row, Col, Button } from 'reactstrap'
+import { Progress, Row, Col } from 'reactstrap'
 import moment from 'moment'
 
 class Review extends Component {
